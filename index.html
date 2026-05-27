@@ -1,1 +1,676 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- SEO / Social -->
+  <title>MOTIONSALT — AMV Editor · Motion Designer · Developer</title>
+  <meta name="description" content="MOTIONSALT — Premium motion design, AMV editing, and development. Watch the latest edits and connect across platforms." />
+  <meta property="og:title" content="MOTIONSALT" />
+  <meta property="og:description" content="AMV Editor · Motion Designer · Developer" />
+  <meta property="og:image" content="image_ad6e6f.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="image_ad6e6f.png" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Space Grotesk + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <style>
+    /* =========================================================
+       MOTIONSALT — Custom Native CSS
+       Premium kinetic motion-design aesthetic
+       ========================================================= */
+
+    :root {
+      --bg-pitch: #000000;
+      --bg-charcoal: #09090b;
+      --bg-charcoal-2: #0d0d10;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --border-mid: rgba(255, 255, 255, 0.14);
+      --text-soft: rgba(255, 255, 255, 0.62);
+      --text-mute: rgba(255, 255, 255, 0.42);
+      /* Signature premium easing — used across the whole site */
+      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      background: var(--bg-pitch);
+      color: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-feature-settings: "ss01", "cv11";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Brand display typeface */
+    .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+
+    /* =========================================================
+       Background atmospherics — subtle radial glows + noise
+       ========================================================= */
+    .bg-atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(60% 40% at 50% 0%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(40% 30% at 100% 100%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(40% 30% at 0% 80%, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 60%);
+    }
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+    }
+
+    /* =========================================================
+       Logo treatment — sharp square with outer glow on hover
+       ========================================================= */
+    .logo-frame {
+      position: relative;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #111114 0%, #09090b 100%);
+      border: 1px solid var(--border-mid);
+      transition: transform 0.7s var(--ease-premium),
+                  box-shadow 0.7s var(--ease-premium),
+                  border-color 0.7s var(--ease-premium);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 20px 50px -20px rgba(0,0,0,0.8);
+    }
+    .logo-frame::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: conic-gradient(from 0deg, rgba(255,255,255,0.0), rgba(255,255,255,0.25), rgba(255,255,255,0.0));
+      opacity: 0;
+      filter: blur(14px);
+      z-index: -1;
+      transition: opacity 0.7s var(--ease-premium);
+    }
+    .logo-frame:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: rgba(255,255,255,0.28);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 30px 70px -20px rgba(255,255,255,0.12);
+    }
+    .logo-frame:hover::before { opacity: 1; }
+
+    .logo-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: invert(1); /* Logo is black on white — invert to white on black */
+      transition: transform 0.9s var(--ease-premium);
+    }
+    .logo-frame:hover img { transform: scale(1.04) rotate(-1deg); }
+
+    /* =========================================================
+       Brand title — bold tracked-out typography
+       ========================================================= */
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      background: linear-gradient(180deg, #ffffff 0%, #b5b5bb 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* =========================================================
+       Skills pill row
+       ========================================================= */
+    .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      transition: all 0.5s var(--ease-premium);
+    }
+    .skill-pill .dot {
+      width: 5px; height: 5px; border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+    .skill-pill:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: var(--border-mid);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       Tool marquee — infinite horizontal scroll
+       ========================================================= */
+    .marquee {
+      position: relative;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0.75rem;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.88);
+      white-space: nowrap;
+      transition: all 0.5s var(--ease-premium);
+    }
+    .tool-chip i { font-size: 0.85rem; opacity: 0.75; }
+    .tool-chip:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--border-mid);
+    }
+
+    /* =========================================================
+       Link Card — the marquee feature of the page
+       ========================================================= */
+    .link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.05rem 1.15rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+      isolation: isolate;
+      transition:
+        transform 0.6s var(--ease-premium),
+        border-color 0.6s var(--ease-premium),
+        background 0.6s var(--ease-premium),
+        box-shadow 0.6s var(--ease-premium);
+      will-change: transform;
+    }
+
+    /* Soft moving sheen on hover */
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.6s var(--ease-premium);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .link-card:hover::before { opacity: 1; }
+
+    .link-card:hover {
+      transform: scale(1.01);
+      border-color: var(--border-mid);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.025) 100%);
+      box-shadow:
+        0 20px 50px -20px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+    }
+    .link-card:active { transform: scale(0.995); }
+
+    .link-card > * { position: relative; z-index: 1; }
+
+    /* Icon block */
+    .link-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-soft);
+      font-size: 1.05rem;
+      color: #ffffff;
+      transition: all 0.6s var(--ease-premium);
+    }
+    .link-card:hover .link-icon {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--border-mid);
+      transform: scale(1.05);
+    }
+
+    /* Text labels */
+    .link-text { flex: 1; min-width: 0; }
+    .link-platform {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      transition: transform 0.6s var(--ease-premium);
+    }
+    .link-cta {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      letter-spacing: 0.04em;
+      transition: color 0.6s var(--ease-premium), transform 0.6s var(--ease-premium);
+    }
+    .link-card:hover .link-platform { transform: translateX(4px); }
+    .link-card:hover .link-cta {
+      color: rgba(255,255,255,0.85);
+      transform: translateX(4px);
+    }
+
+    /* Chevron */
+    .link-arrow {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.6s var(--ease-premium);
+    }
+    .link-card:hover .link-arrow {
+      color: #ffffff;
+      transform: translateX(6px);
+    }
+
+    /* =========================================================
+       Staggered entrance animations
+       ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal 1s var(--ease-premium) forwards;
+    }
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger delays via data-delay attribute */
+    .reveal[data-delay="0"]   { animation-delay: 0.05s; }
+    .reveal[data-delay="1"]   { animation-delay: 0.18s; }
+    .reveal[data-delay="2"]   { animation-delay: 0.30s; }
+    .reveal[data-delay="3"]   { animation-delay: 0.42s; }
+    .reveal[data-delay="4"]   { animation-delay: 0.54s; }
+    .reveal[data-delay="5"]   { animation-delay: 0.66s; }
+    .reveal[data-delay="6"]   { animation-delay: 0.78s; }
+    .reveal[data-delay="7"]   { animation-delay: 0.90s; }
+    .reveal[data-delay="8"]   { animation-delay: 1.02s; }
+    .reveal[data-delay="9"]   { animation-delay: 1.14s; }
+    .reveal[data-delay="10"]  { animation-delay: 1.26s; }
+
+    /* Soft pulse for the live dot */
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+      animation: pulse 2s var(--ease-premium) infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+      70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    /* Section divider line */
+    .section-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label::before {
+      content: "";
+      width: 24px; height: 1px;
+      background: var(--border-mid);
+    }
+
+    /* =========================================================
+       Custom cursor — desktop only
+       ========================================================= */
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      will-change: transform;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: #ffffff;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-premium), height 0.4s var(--ease-premium);
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s var(--ease-premium), height 0.5s var(--ease-premium), border-color 0.5s var(--ease-premium);
+    }
+    body.cursor-hover .cursor-dot { width: 14px; height: 14px; }
+    body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(255,255,255,0.9); }
+
+    /* Hide custom cursor on touch devices */
+    @media (hover: none), (pointer: coarse) {
+      .cursor-dot, .cursor-ring { display: none !important; }
+    }
+
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .reveal { animation: none; opacity: 1; transform: none; }
+      .live-dot { animation: none; }
+    }
+
+    /* Footer */
+    .footer-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen relative">
+
+  <!-- Background atmospherics -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-atmosphere" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop) -->
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       MAIN CONTAINER
+       ========================================================= -->
+  <main class="relative z-10 mx-auto w-full max-w-[480px] px-5 sm:px-6 pt-14 pb-16 sm:pt-20">
+
+    <!-- ============================
+         A. HERO / PROFILE HEADER
+         ============================ -->
+    <section id="hero-section" class="flex flex-col items-center text-center">
+
+      <!-- Logo -->
+      <a href="#" class="logo-frame reveal block w-[112px] h-[112px] sm:w-[128px] sm:h-[128px] p-3 sm:p-4" data-delay="0" aria-label="MOTIONSALT logo" data-cursor="hover">
+        <img src="image_ad6e6f.png" alt="MOTIONSALT logo" loading="eager" decoding="async" />
+      </a>
+
+      <!-- Status pill -->
+      <div class="reveal mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md" data-delay="1">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class="text-[0.68rem] tracking-[0.22em] uppercase text-white/70">Available for work</span>
+      </div>
+
+      <!-- Brand title -->
+      <h1 class="reveal brand-title mt-5 text-3xl sm:text-4xl" data-delay="2">
+        MOTIONSALT
+      </h1>
+
+      <!-- Tagline / Skills -->
+      <p class="reveal mt-3 text-sm text-white/55 max-w-xs leading-relaxed" data-delay="3">
+        Crafting kinetic stories through frames, code, and pure motion.
+      </p>
+
+      <!-- Skill pills -->
+      <div class="reveal mt-5 flex flex-wrap items-center justify-center gap-2" data-delay="4">
+        <span class="skill-pill"><span class="dot"></span>AMV Editor</span>
+        <span class="skill-pill"><span class="dot"></span>Motion Designer</span>
+        <span class="skill-pill"><span class="dot"></span>Developer</span>
+      </div>
+    </section>
+
+    <!-- ============================
+         B. TOOL STACK / MARQUEE
+         ============================ -->
+    <section id="tools-section" class="mt-12 sm:mt-14">
+      <div class="reveal flex items-center justify-center mb-4" data-delay="5">
+        <span class="section-label">Toolkit</span>
+      </div>
+
+      <div class="reveal marquee" data-delay="6">
+        <div class="marquee-track">
+          <!-- Set 1 -->
+          <span class="tool-chip"><i class="fa-solid fa-bolt"></i>After Effects</span>
+          <span class="tool-chip"><i class="fa-solid fa-film"></i>Premiere Pro</span>
+          <span class="tool-chip"><i class="fa-solid fa-image"></i>Photoshop</span>
+          <span class="tool-chip"><i class="fa-solid fa-gem"></i>Gemini</span>
+          <span class="tool-chip"><i class="fa-solid fa-brain"></i>Claude</span>
+          <!-- Set 2 (duplicate for seamless loop) -->
+          <span class="tool-chip" aria-hidden="true"><i class="fa-solid fa-bolt"></i>After Effects</span>
+          <span class="tool-chip" aria-hidden="true"><i class="fa-solid fa-film"></i>Premiere Pro</span>
+          <span class="tool-chip" aria-hidden="true"><i class="fa-solid fa-image"></i>Photoshop</span>
+          <span class="tool-chip" aria-hidden="true"><i class="fa-solid fa-gem"></i>Gemini</span>
+          <span class="tool-chip" aria-hidden="true"><i class="fa-solid fa-brain"></i>Claude</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+         C. PREMIUM LINK GRID
+         ============================ -->
+    <section id="links-section" class="mt-12 sm:mt-14">
+      <div class="reveal flex items-center justify-center mb-5" data-delay="7">
+        <span class="section-label">Connect</span>
+      </div>
+
+      <nav class="flex flex-col gap-3" aria-label="Social links">
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@motionssalt" target="_blank" rel="noopener noreferrer"
+           class="link-card reveal" data-delay="7" data-cursor="hover">
+          <span class="link-icon" aria-hidden="true"><i class="fa-brands fa-youtube"></i></span>
+          <span class="link-text">
+            <span class="block link-platform">YouTube</span>
+            <span class="block link-cta">Watch Latest Edits</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://tiktok.com/@motionsalt" target="_blank" rel="noopener noreferrer"
+           class="link-card reveal" data-delay="8" data-cursor="hover">
+          <span class="link-icon" aria-hidden="true"><i class="fa-brands fa-tiktok"></i></span>
+          <span class="link-text">
+            <span class="block link-platform">TikTok</span>
+            <span class="block link-cta">Short-form Motion</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/motionssalt/" target="_blank" rel="noopener noreferrer"
+           class="link-card reveal" data-delay="9" data-cursor="hover">
+          <span class="link-icon" aria-hidden="true"><i class="fa-brands fa-instagram"></i></span>
+          <span class="link-text">
+            <span class="block link-platform">Instagram</span>
+            <span class="block link-cta">Visual Diary &amp; Reels</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="https://x.com/motionssalt" target="_blank" rel="noopener noreferrer"
+           class="link-card reveal" data-delay="9" data-cursor="hover">
+          <span class="link-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="display:block">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </span>
+          <span class="link-text">
+            <span class="block link-platform">X</span>
+            <span class="block link-cta">Thoughts &amp; Drops</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/motionsalt" target="_blank" rel="noopener noreferrer"
+           class="link-card reveal" data-delay="10" data-cursor="hover">
+          <span class="link-icon" aria-hidden="true"><i class="fa-brands fa-telegram"></i></span>
+          <span class="link-text">
+            <span class="block link-platform">Telegram</span>
+            <span class="block link-cta">Join the Channel</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+      </nav>
+    </section>
+
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="mt-14 sm:mt-16 flex flex-col items-center gap-2">
+      <div class="reveal footer-text" data-delay="10">© <span id="year"></span> MOTIONSALT</div>
+      <div class="reveal text-[0.62rem] tracking-[0.28em] uppercase text-white/30" data-delay="10">
+        Designed in motion
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- =========================================================
+       JS — Custom cursor, magnetic mouse-track sheen, year stamp
+       ========================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------
+         1. Year stamp
+      ---------------------------------------- */
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      /* ----------------------------------------
+         2. Custom trailing cursor (desktop)
+      ---------------------------------------- */
+      const isCoarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+      if (!isCoarse) {
+        const dot  = document.querySelector('.cursor-dot');
+        const ring = document.querySelector('.cursor-ring');
+
+        let mx = window.innerWidth / 2,  my = window.innerHeight / 2;
+        let dx = mx, dy = my;   // dot position (faster follow)
+        let rx = mx, ry = my;   // ring position (lagging trail)
+
+        window.addEventListener('mousemove', (e) => {
+          mx = e.clientX; my = e.clientY;
+        }, { passive: true });
+
+        function animateCursor() {
+          // Snappy dot
+          dx += (mx - dx) * 0.35;
+          dy += (my - dy) * 0.35;
+          // Lagging ring — creates the trailing motion-design feel
+          rx += (mx - rx) * 0.15;
+          ry += (my - ry) * 0.15;
+
+          dot.style.transform  = `translate(${dx}px, ${dy}px) translate(-50%, -50%)`;
+          ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+          requestAnimationFrame(animateCursor);
+        }
+        requestAnimationFrame(animateCursor);
+
+        // Hover-state enlargement over interactive elements
+        const hoverables = document.querySelectorAll('a, button, [data-cursor="hover"]');
+        hoverables.forEach((el) => {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+      }
+
+      /* ----------------------------------------
+         3. Mouse-tracking sheen on link cards
+         (sets --mx / --my CSS vars used by ::before radial gradient)
+      ---------------------------------------- */
+      document.querySelectorAll('.link-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top)  / rect.height) * 100;
+          card.style.setProperty('--mx', x + '%');
+          card.style.setProperty('--my', y + '%');
+        });
+      });
+
+      /* ----------------------------------------
+         4. Graceful logo fallback if the PNG fails to load
+      ---------------------------------------- */
+      const logoImg = document.querySelector('.logo-frame img');
+      if (logoImg) {
+        logoImg.addEventListener('error', () => {
+          // Replace with a stylized SVG mark of the letter "M"
+          const frame = logoImg.parentElement;
+          frame.innerHTML = `
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset="1" stop-color="#9ca3af"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#g)" d="M18 78 L30 22 L50 58 L70 22 L82 78 L70 78 L64 46 L52 70 L48 70 L36 46 L30 78 Z"/>
+            </svg>`;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
