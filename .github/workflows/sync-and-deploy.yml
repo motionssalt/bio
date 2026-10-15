@@ -1,0 +1,91 @@
+name: Sync Drive Catalogue & Deploy to Cloudflare Pages
+
+on:
+  schedule:
+    # Run sync every 3 hours
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force catalogue sync override safety limits'
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: sync-and-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  sync-build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Cache Derived Media Assets
+        uses: actions/cache@v4
+        with:
+          path: public/media
+          key: ${{ runner.os }}-media-cache-${{ hashFiles('config/categories.json', 'config/overrides.json') }}
+          restore-keys: |
+            ${{ runner.os }}-media-cache-
+
+      - name: Install Project Dependencies
+        run: bun install
+
+      - name: Sync Public Google Drive Catalogue
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            bun scripts/sync-drive.ts --force
+          else
+            bun scripts/sync-drive.ts
+          fi
+
+      - name: Build Production Assets
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=motionssalt-portfolio --branch=main
+
+      - name: Commit Catalogue Snapshot (Keep-Alive & State Backup)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet src/data/catalog.json; then
+            git add src/data/catalog.json public/catalog.json BUILD_STATE.json
+            git commit -m "chore(sync): automated Google Drive catalogue refresh [skip ci]"
+            git push origin main
+          else
+            echo "Catalogue is up to date. No changes to commit."
+          fi

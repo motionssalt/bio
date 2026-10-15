@@ -4,6 +4,7 @@ import json
 import os
 import base64
 import sys
+from concurrent.futures import ThreadPoolExecutor
 
 GH_PAT = os.environ.get("GITHUB_PAT")
 REPO = "motionssalt/bio"
@@ -28,8 +29,25 @@ def api_call(endpoint, method="GET", data=None):
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read().decode("utf-8"))
 
+def upload_file(fpath):
+    relpath = os.path.relpath(fpath, ".").replace("\\", "/")
+    with open(fpath, "rb") as fp:
+        content_bytes = fp.read()
+    b64_content = base64.b64encode(content_bytes).decode("ascii")
+    blob_res = api_call("git/blobs", method="POST", data={
+        "content": b64_content,
+        "encoding": "base64"
+    })
+    mode = "100755" if os.access(fpath, os.X_OK) and not fpath.endswith(('.json', '.ts', '.tsx', '.html', '.css', '.md')) else "100644"
+    return {
+        "path": relpath,
+        "mode": mode,
+        "type": "blob",
+        "sha": blob_res["sha"]
+    }
+
 def main():
-    print("🚀 Pushing all codebase files to GitHub via Git Data API...")
+    print("🚀 Pushing all codebase files to GitHub via Git Data API (Multi-Threaded)...")
     
     # 1. Get current commit on main
     ref_info = api_call("git/ref/heads/main")
@@ -37,42 +55,26 @@ def main():
     print(f"Parent commit on main: {parent_sha}")
 
     # 2. Gather all tracked files
-    tree_items = []
     ignored_dirs = {".git", "node_modules", "legacy", "build", "dist"}
+    file_paths = []
     
-    file_count = 0
     for root, dirs, files in os.walk("."):
         dirs[:] = [d for d in dirs if d not in ignored_dirs]
         for f in files:
             fpath = os.path.join(root, f)
             relpath = os.path.relpath(fpath, ".").replace("\\", "/")
-            if relpath.startswith(".git") or relpath.startswith("node_modules") or relpath.startswith("legacy"):
+            if relpath == ".git" or relpath.startswith(".git/") or relpath.startswith("node_modules/") or relpath.startswith("legacy/"):
                 continue
-            
-            with open(fpath, "rb") as fp:
-                content_bytes = fp.read()
-            
-            b64_content = base64.b64encode(content_bytes).decode("ascii")
-            blob_res = api_call("git/blobs", method="POST", data={
-                "content": b64_content,
-                "encoding": "base64"
-            })
-            
-            mode = "100755" if os.access(fpath, os.X_OK) and not fpath.endswith(('.json', '.ts', '.tsx', '.html', '.css', '.md')) else "100644"
-            tree_items.append({
-                "path": relpath,
-                "mode": mode,
-                "type": "blob",
-                "sha": blob_res["sha"]
-            })
-            file_count += 1
-            if file_count % 10 == 0:
-                print(f"  Uploaded {file_count} blobs...")
+            file_paths.append(fpath)
 
-    print(f"Total files uploaded: {len(tree_items)}")
+    print(f"Uploading {len(file_paths)} files in parallel (8 workers)...")
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        tree_items = list(executor.map(upload_file, file_paths))
+
+    print(f"All {len(tree_items)} blobs uploaded successfully!")
 
     # 3. Create tree
-    print("Creating new Git tree...")
+    print("Creating Git tree...")
     tree_res = api_call("git/trees", method="POST", data={
         "tree": tree_items
     })
@@ -95,7 +97,7 @@ def main():
 
     # 5. Update ref heads/main
     print("Updating branch ref heads/main...")
-    update_res = api_call("git/refs/heads/main", method="PATCH", data={
+    api_call("git/refs/heads/main", method="PATCH", data={
         "sha": new_commit_sha,
         "force": True
     })
