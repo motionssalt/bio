@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /upwork/
+
+Sitemap: https://motionssalt-portfolio.pages.dev/sitemap.xml

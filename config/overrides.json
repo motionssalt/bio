@@ -1,0 +1,132 @@
+{
+  "items": {
+    "1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO": {
+      "title": "Investcore Commercial Motion Showcase",
+      "category": "motion-graphics",
+      "featured": true,
+      "role": "Motion Designer & Compositor",
+      "description": "High-energy commercial motion piece highlighting dynamic data visualization, sleek 3D depth, and rhythmic typography tuned for financial tech.",
+      "tools": ["After Effects", "Illustrator"]
+    },
+    "1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG": {
+      "title": "Kinetic Beat Sync Reel",
+      "category": "video-editing",
+      "featured": true,
+      "role": "Editor & VFX Artist",
+      "description": "Punchy speed-ramped edit demonstrating tight micro-cuts, seamless spatial match-cuts, and bass-driven impact shakes.",
+      "tools": ["Premiere Pro", "After Effects"]
+    },
+    "1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF": {
+      "title": "Chimera Cyberpunk Silhouette VFX",
+      "category": "video-editing",
+      "featured": true,
+      "role": "VFX Artist",
+      "description": "Atmospheric anime visual effects composite combining volumetric neon glows, chromatic aberration, and particle flow fields.",
+      "tools": ["After Effects", "Photoshop"]
+    },
+    "18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-": {
+      "title": "Neon Ronin Color Grade & Glow",
+      "category": "video-editing",
+      "featured": false,
+      "role": "Colorist & Compositor",
+      "description": "Stylized split-tone grading and edge glow pass for cinematic anime battle sequence.",
+      "tools": ["After Effects"]
+    },
+    "1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8": {
+      "title": "Dark Matter Kinetic Poster",
+      "category": "video-editing",
+      "featured": false,
+      "role": "Motion Designer",
+      "description": "Distorted typographic visual with glitch displacement and grain overlay.",
+      "tools": ["Photoshop", "After Effects"]
+    },
+    "1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy": {
+      "title": "VFX Flame Arc Composition",
+      "category": "video-editing",
+      "featured": false,
+      "role": "VFX Compositor",
+      "description": "Custom hand-tracked particle burst and shockwave overlay.",
+      "tools": ["After Effects"]
+    },
+    "1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU": {
+      "title": "Cyberpunk Neon Editorial Key Visual",
+      "category": "graphic-design",
+      "featured": true,
+      "role": "Graphic Designer",
+      "description": "Futuristic typography and high-contrast color grading designed for album cover and social campaign.",
+      "tools": ["Photoshop"]
+    },
+    "1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp": {
+      "title": "Obsidian Kinetic Cover Art",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Brutalist typographic hierarchy and monochromatic texture contrast for digital release.",
+      "tools": ["Photoshop"]
+    },
+    "1WChREuAc3TwisdKODq2yJn4OKETrsg-S": {
+      "title": "High-Paced Social Campaign Art #1",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Bold visual anchor with editorial framing and modern brand identity styling.",
+      "tools": ["Photoshop", "Illustrator"]
+    },
+    "1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH": {
+      "title": "High-Paced Social Campaign Art #2",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Dynamic layout exploring negative space and aggressive typography.",
+      "tools": ["Photoshop"]
+    },
+    "1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r": {
+      "title": "Kinetic Album Teaser Visual #3",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Textured paper and noise composite with high-saturation focal elements.",
+      "tools": ["Photoshop"]
+    },
+    "1hfrworDeotNdChlsbiPmHwkkP2cT3jIy": {
+      "title": "Kinetic Album Teaser Visual #4",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Editorial portrait composite with sharp modern geometric motifs.",
+      "tools": ["Photoshop"]
+    },
+    "1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb": {
+      "title": "Glitch Frequency Social Art",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Displacement map distortion and retro analog scanline treatment.",
+      "tools": ["Photoshop"]
+    },
+    "1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII": {
+      "title": "Vibrant Streamer YouTube Banner",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "High-CTR YouTube banner design optimized across mobile, desktop, and smart TV screens.",
+      "tools": ["Photoshop"]
+    },
+    "1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC": {
+      "title": "Brand Identity Poster: Edition A",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Clean minimalist branding exploration with warm studio backlight.",
+      "tools": ["Photoshop"]
+    },
+    "1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC": {
+      "title": "Brand Identity Poster: Edition B",
+      "category": "graphic-design",
+      "featured": false,
+      "role": "Graphic Designer",
+      "description": "Complementary social media promotional poster exploring alternate typography.",
+      "tools": ["Photoshop"]
+    }
+  }
+}

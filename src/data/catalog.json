@@ -1,0 +1,419 @@
+{
+  "version": "1.0.0",
+  "lastSyncedAt": "2026-10-15T16:09:53.093Z",
+  "totalItems": 16,
+  "categories": [
+    {
+      "id": "video-editing",
+      "title": "Video Editing",
+      "shortDescription": "Cinematic pacing, anime edits (AMVs), YouTube long-form & short-form reels.",
+      "folderPatterns": [
+        "VIDEOS",
+        "ChimeraVFX",
+        "video",
+        "edits"
+      ],
+      "icon": "film"
+    },
+    {
+      "id": "motion-graphics",
+      "title": "Motion Graphics",
+      "shortDescription": "Dynamic typography, kinetic title sequences, brand animations & explainer motion.",
+      "folderPatterns": [
+        "MOTION",
+        "motion",
+        "animation",
+        "kinetic"
+      ],
+      "icon": "zap"
+    },
+    {
+      "id": "graphic-design",
+      "title": "Graphic Design",
+      "shortDescription": "High-impact social promo art, cover artwork, YouTube thumbnails & visual identity.",
+      "folderPatterns": [
+        "GRAPHICS",
+        "graphics",
+        "design",
+        "posters",
+        "art"
+      ],
+      "icon": "palette"
+    }
+  ],
+  "items": [
+    {
+      "id": "1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF",
+      "title": "Chimera Cyberpunk Silhouette VFX",
+      "category": "video-editing",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF/view",
+      "embedUrl": "https://drive.google.com/file/d/1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF",
+      "downloadAllowed": true,
+      "poster": "/media/1U9xJSDtUcG7qRbyGyTDerGeO-VsJQMvF_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 676,
+      "durationSec": null,
+      "bytes": 126498,
+      "modifiedTime": "2026-10-15T16:09:19.069Z",
+      "description": "Atmospheric anime visual effects composite combining volumetric neon glows, chromatic aberration, and particle flow fields.",
+      "role": "VFX Artist",
+      "featured": true,
+      "tools": [
+        "After Effects",
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-",
+      "title": "Neon Ronin Color Grade & Glow",
+      "category": "video-editing",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-/view",
+      "embedUrl": "https://drive.google.com/file/d/18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-",
+      "downloadAllowed": true,
+      "poster": "/media/18fui-bzF4TxkoesiTNO6j5CZuAWc0B9-_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1200,
+      "durationSec": null,
+      "bytes": 251016,
+      "modifiedTime": "2026-10-15T16:09:21.436Z",
+      "description": "Stylized split-tone grading and edge glow pass for cinematic anime battle sequence.",
+      "role": "Colorist & Compositor",
+      "featured": false,
+      "tools": [
+        "After Effects"
+      ]
+    },
+    {
+      "id": "1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8",
+      "title": "Dark Matter Kinetic Poster",
+      "category": "video-editing",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8/view",
+      "embedUrl": "https://drive.google.com/file/d/1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8",
+      "downloadAllowed": true,
+      "poster": "/media/1myVIUadtMvYfcxuQ6fRgzUom1C6EYCz8_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 676,
+      "durationSec": null,
+      "bytes": 129578,
+      "modifiedTime": "2026-10-15T16:09:23.050Z",
+      "description": "Distorted typographic visual with glitch displacement and grain overlay.",
+      "role": "Motion Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop",
+        "After Effects"
+      ]
+    },
+    {
+      "id": "1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy",
+      "title": "VFX Flame Arc Composition",
+      "category": "video-editing",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy/view",
+      "embedUrl": "https://drive.google.com/file/d/1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy",
+      "downloadAllowed": true,
+      "poster": "/media/1DDlgtyr3fzkpnLOF2m1vUlnqPkc3aCWy_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1200,
+      "durationSec": null,
+      "bytes": 186394,
+      "modifiedTime": "2026-10-15T16:09:26.092Z",
+      "description": "Custom hand-tracked particle burst and shockwave overlay.",
+      "role": "VFX Compositor",
+      "featured": false,
+      "tools": [
+        "After Effects"
+      ]
+    },
+    {
+      "id": "1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU",
+      "title": "Cyberpunk Neon Editorial Key Visual",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU/view",
+      "embedUrl": "https://drive.google.com/file/d/1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU",
+      "downloadAllowed": true,
+      "poster": "/media/1sMnoOg8Joq5RtnMVmKrfVGp6DZPZxmbU_poster.webp",
+      "previewClip": null,
+      "width": 1122,
+      "height": 1402,
+      "durationSec": null,
+      "bytes": 447188,
+      "modifiedTime": "2026-10-15T16:09:27.843Z",
+      "description": "Futuristic typography and high-contrast color grading designed for album cover and social campaign.",
+      "role": "Graphic Designer",
+      "featured": true,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp",
+      "title": "Obsidian Kinetic Cover Art",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp/view",
+      "embedUrl": "https://drive.google.com/file/d/1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp",
+      "downloadAllowed": true,
+      "poster": "/media/1oeH4h96EvsaEGrg0YVLjDhYLTL8XM0fp_poster.webp",
+      "previewClip": null,
+      "width": 1145,
+      "height": 1374,
+      "durationSec": null,
+      "bytes": 280586,
+      "modifiedTime": "2026-10-15T16:09:28.867Z",
+      "description": "Brutalist typographic hierarchy and monochromatic texture contrast for digital release.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1WChREuAc3TwisdKODq2yJn4OKETrsg-S",
+      "title": "High-Paced Social Campaign Art #1",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1WChREuAc3TwisdKODq2yJn4OKETrsg-S/view",
+      "embedUrl": "https://drive.google.com/file/d/1WChREuAc3TwisdKODq2yJn4OKETrsg-S/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1WChREuAc3TwisdKODq2yJn4OKETrsg-S",
+      "downloadAllowed": true,
+      "poster": "/media/1WChREuAc3TwisdKODq2yJn4OKETrsg-S_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1608,
+      "durationSec": null,
+      "bytes": 365124,
+      "modifiedTime": "2026-10-15T16:09:30.035Z",
+      "description": "Bold visual anchor with editorial framing and modern brand identity styling.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop",
+        "Illustrator"
+      ]
+    },
+    {
+      "id": "1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH",
+      "title": "High-Paced Social Campaign Art #2",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH/view",
+      "embedUrl": "https://drive.google.com/file/d/1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH",
+      "downloadAllowed": true,
+      "poster": "/media/1JNH9Chy7UMqqgoC4z0mkt6zdafOW4mhH_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1200,
+      "durationSec": null,
+      "bytes": 251578,
+      "modifiedTime": "2026-10-15T16:09:31.174Z",
+      "description": "Dynamic layout exploring negative space and aggressive typography.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r",
+      "title": "Kinetic Album Teaser Visual #3",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r/view",
+      "embedUrl": "https://drive.google.com/file/d/1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r",
+      "downloadAllowed": true,
+      "poster": "/media/1ebnhVuZZDX_G4NjatF29Uv3b4F8hyO_r_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1608,
+      "durationSec": null,
+      "bytes": 306852,
+      "modifiedTime": "2026-10-15T16:09:32.303Z",
+      "description": "Textured paper and noise composite with high-saturation focal elements.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1hfrworDeotNdChlsbiPmHwkkP2cT3jIy",
+      "title": "Kinetic Album Teaser Visual #4",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1hfrworDeotNdChlsbiPmHwkkP2cT3jIy/view",
+      "embedUrl": "https://drive.google.com/file/d/1hfrworDeotNdChlsbiPmHwkkP2cT3jIy/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1hfrworDeotNdChlsbiPmHwkkP2cT3jIy",
+      "downloadAllowed": true,
+      "poster": "/media/1hfrworDeotNdChlsbiPmHwkkP2cT3jIy_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1608,
+      "durationSec": null,
+      "bytes": 255804,
+      "modifiedTime": "2026-10-15T16:09:33.542Z",
+      "description": "Editorial portrait composite with sharp modern geometric motifs.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb",
+      "title": "Glitch Frequency Social Art",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb/view",
+      "embedUrl": "https://drive.google.com/file/d/1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb",
+      "downloadAllowed": true,
+      "poster": "/media/1eutHuPKAYSY--FDpM3RiIK7NxLl315Vb_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1508,
+      "durationSec": null,
+      "bytes": 81984,
+      "modifiedTime": "2026-10-15T16:09:34.545Z",
+      "description": "Displacement map distortion and retro analog scanline treatment.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII",
+      "title": "Vibrant Streamer YouTube Banner",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII/view",
+      "embedUrl": "https://drive.google.com/file/d/1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII",
+      "downloadAllowed": true,
+      "poster": "/media/1dIdVkcvv-CiSv0uwHuGMNYxqy8Ou3HII_poster.webp",
+      "previewClip": null,
+      "width": 1200,
+      "height": 1508,
+      "durationSec": null,
+      "bytes": 177356,
+      "modifiedTime": "2026-10-15T16:09:36.948Z",
+      "description": "High-CTR YouTube banner design optimized across mobile, desktop, and smart TV screens.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC",
+      "title": "Brand Identity Poster: Edition A",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC/view",
+      "embedUrl": "https://drive.google.com/file/d/1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC",
+      "downloadAllowed": true,
+      "poster": "/media/1JnhXFbMFWZegl93XbmrCVDogaqtdz-bC_poster.webp",
+      "previewClip": null,
+      "width": 1024,
+      "height": 1280,
+      "durationSec": null,
+      "bytes": 138002,
+      "modifiedTime": "2026-10-15T16:09:37.872Z",
+      "description": "Clean minimalist branding exploration with warm studio backlight.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC",
+      "title": "Brand Identity Poster: Edition B",
+      "category": "graphic-design",
+      "type": "image",
+      "driveUrl": "https://drive.google.com/file/d/1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC/view",
+      "embedUrl": "https://drive.google.com/file/d/1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC",
+      "downloadAllowed": true,
+      "poster": "/media/1FRWFD95WU3XjoZdtqHWoBvMzJ6TTQbsC_poster.webp",
+      "previewClip": null,
+      "width": 956,
+      "height": 1280,
+      "durationSec": null,
+      "bytes": 117046,
+      "modifiedTime": "2026-10-15T16:09:38.821Z",
+      "description": "Complementary social media promotional poster exploring alternate typography.",
+      "role": "Graphic Designer",
+      "featured": false,
+      "tools": [
+        "Photoshop"
+      ]
+    },
+    {
+      "id": "1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO",
+      "title": "Investcore Commercial Motion Showcase",
+      "category": "motion-graphics",
+      "type": "motion",
+      "driveUrl": "https://drive.google.com/file/d/1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO/view",
+      "embedUrl": "https://drive.google.com/file/d/1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO",
+      "downloadAllowed": true,
+      "poster": "/media/1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO_poster.webp",
+      "previewClip": null,
+      "width": 1920,
+      "height": 1080,
+      "durationSec": null,
+      "bytes": null,
+      "modifiedTime": "2026-10-15T16:09:48.797Z",
+      "description": "High-energy commercial motion piece highlighting dynamic data visualization, sleek 3D depth, and rhythmic typography tuned for financial tech.",
+      "role": "Motion Designer & Compositor",
+      "featured": true,
+      "tools": [
+        "After Effects",
+        "Illustrator"
+      ]
+    },
+    {
+      "id": "1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG",
+      "title": "Kinetic Beat Sync Reel",
+      "category": "video-editing",
+      "type": "motion",
+      "driveUrl": "https://drive.google.com/file/d/1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG/view",
+      "embedUrl": "https://drive.google.com/file/d/1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG/preview",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG",
+      "downloadAllowed": true,
+      "poster": "/media/1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG_poster.webp",
+      "previewClip": "/media/1yumy2wjGD-qSuPkwORLFU5NGowv-j8WG_preview.mp4",
+      "width": 1920,
+      "height": 1088,
+      "durationSec": 6.833333,
+      "bytes": 2564909,
+      "modifiedTime": "2026-10-15T16:09:52.853Z",
+      "description": "Punchy speed-ramped edit demonstrating tight micro-cuts, seamless spatial match-cuts, and bass-driven impact shakes.",
+      "role": "Editor & VFX Artist",
+      "featured": true,
+      "tools": [
+        "Premiere Pro",
+        "After Effects"
+      ]
+    }
+  ]
+}

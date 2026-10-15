@@ -1,0 +1,6 @@
+{
+  "name": "MOTIONSALT Portfolio",
+  "description": "Premium creative portfolio for Victor (MOTIONSALT) — Video Editing, Motion Graphics, and Graphic Design with public Google Drive-powered dynamic catalogue.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

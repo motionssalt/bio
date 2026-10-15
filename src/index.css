@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #fafafa;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f4f4f5;
+    --bg-surface-glass: rgba(255, 255, 255, 0.75);
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-mid: rgba(0, 0, 0, 0.16);
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --accent: #2563eb;
+    --accent-glow: rgba(37, 99, 235, 0.15);
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme="dark"] {
+    --bg-base: #050505;
+    --bg-surface: #0c0c0e;
+    --bg-surface-elevated: #141417;
+    --bg-surface-glass: rgba(12, 12, 14, 0.82);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-mid: rgba(255, 255, 255, 0.18);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.68);
+    --text-muted: rgba(255, 255, 255, 0.44);
+    --accent: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.2);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light dark;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+/* Kinetic sheen & cursor tracking */
+.kinetic-card {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.28s var(--ease-premium), border-color 0.28s var(--ease-premium), box-shadow 0.28s var(--ease-premium);
+}
+
+.kinetic-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .kinetic-card:hover {
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.65), 0 0 20px -4px var(--accent-glow);
+}
+
+/* Marquee ribbon */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
