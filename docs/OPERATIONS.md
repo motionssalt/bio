@@ -1,33 +1,63 @@
 # MOTIONSALT Portfolio — Operations & Content Manual
 
-This guide explains how to manage, add, update, and feature work in your portfolio directly from your phone.
+This guide explains how to manage, add, update, and showcase your work directly from your phone.
+
+---
+
+## 📁 The Three Service Folders (Google Drive)
+
+Your portfolio operates exclusively on the **three core creative service folders**:
+
+| Service | Google Drive Folder | Intelligent Index Name Generated |
+| :--- | :--- | :--- |
+| **Video Editing** | **`VIDEOS`** | `Video Edit #01`, `Video Edit #02`... |
+| **Motion Graphics** | **`MOTION`** | `Motion Graphic #01`, `Motion Graphic #02`... |
+| **Graphic Design** | **`GRAPHICS`** | `Graphic Design #01`, `Graphic Design #02`... |
+
+### ⚠️ Strict Invariant Rules:
+1. **Root Folder Exclusion:** Anything placed directly in the Google Drive root folder is ignored and will **never** appear on the site. Files must be placed into one of the three service folders above.
+2. **Other Folders Excluded:** Any folders outside the three services (e.g. `ChimeraVFX` or unrelated project dumps) are automatically skipped.
+3. **No Artificial AI Names:** All files receive clean, sequential index names per folder (e.g. `Motion Graphic #01`, `Graphic Design #01`) instead of arbitrary AI-invented titles.
+4. **Randomized Featuring:** No file is statically locked as "featured". Instead, the Hero showreel features work **randomly from the three folders** on every visit or refresh, and visitors can click **Randomize** to cycle through your catalogue.
 
 ---
 
 ## 📱 Adding New Work (From Your Android Phone)
 
-Because the portfolio is connected to your public Google Drive folder, **you never need to edit code to update your portfolio**.
+Because the portfolio is connected to your public Google Drive, **you never need to edit code to update your portfolio**:
 
-### Step 1: Open Google Drive on Your Phone
-Open your Google Drive app or web browser and navigate to the root folder:  
-`https://drive.google.com/drive/folders/1w2KqAMVrJrHiz4T55FQZaCuYGoFZc5g8`
+1. Open your Google Drive app or phone browser to the root folder:  
+   `https://drive.google.com/drive/folders/1w2KqAMVrJrHiz4T55FQZaCuYGoFZc5g8`
+2. Open either **`VIDEOS`**, **`MOTION`**, or **`GRAPHICS`**.
+3. Upload your video (`.mp4`, `.mov`) or image (`.png`, `.jpg`, `.webp`).
+4. The system automatically indexes the file, extracts resolution and duration, generates a lightweight WebP poster and fast MP4 preview clip, and updates your site!
 
-### Step 2: Choose the Correct Subfolder
-Upload your file into the folder matching the service:
-- **`VIDEOS`** or **`ChimeraVFX`** → Appears under **Video Editing** (AMVs, commercial cuts, VFX).
-- **`MOTION`** → Appears under **Motion Graphics** (kinetic typography, logo animations, product motion).
-- **`GRAPHICS`** → Appears under **Graphic Design** (posters, YouTube thumbnails, album covers).
+---
 
-### Step 3: Filename Conventions for Automatic Title & Feature
-- **Clean Titles:** Name your file cleanly before uploading (e.g. `Cyberpunk_Reel.mp4` will automatically format as `Cyberpunk Reel`).
-- **Feature on Hero/Grid:** Add `#featured` or `[featured]` to the filename (e.g. `Investcore_Commercial_[featured].mp4`) to feature the project at the top of your portfolio!
+## 🎬 Video Player Controls
+
+The video player has been rebuilt from scratch as a high-performance native HTML5 player:
+- **Zero Control Collisions:** Clean custom controls designed specifically for mobile touch screens (no overlapping Google Drive preview bars or cut-off buttons).
+- **Time Scrubber:** Smooth scrub bar showing current time and total video length (e.g. `0:04 / 0:40`).
+- **Volume & Fullscreen:** Touch-friendly mute/volume slider and instant fullscreen toggle.
+- **Drive Embed Toggle:** If you ever wish to view the original Google Drive embed, a one-tap button switches views smoothly.
+
+---
+
+## 🖼️ Image Full Screen Viewer
+
+Every graphic design piece now features a dedicated **Full Screen** button:
+- Tap **Full Screen** on any image card or inside the modal to open the full-viewport lightbox.
+- Includes **Zoom In / Zoom Out** (100% to 300%) with tap-to-zoom.
+- Includes **Previous / Next** arrows to browse through the entire graphic design catalogue in fullscreen.
+- Press **Esc** or tap the exit button to return.
 
 ---
 
 ## ⚡ Sync Schedule & Forcing an Immediate Update
 
 ### Automatic Schedule:
-The GitHub Actions pipeline runs automatically **every 3 hours** in the background. Once you upload a file, it will appear on your live site on the next scheduled run.
+The GitHub Actions pipeline runs automatically **every 3 hours** in the background.
 
 ### Need it Live Immediately? (Manual Force Sync):
 1. On your phone browser, open GitHub: [https://github.com/motionssalt/bio/actions](https://github.com/motionssalt/bio/actions)
@@ -39,28 +69,9 @@ Your portfolio will sync, process new video previews with FFmpeg, and deploy liv
 
 ---
 
-## 🛠️ Advanced Customization (`config/overrides.json`)
-
-If you want custom client descriptions, exact role credits, or specific tool badges for any project:
-1. Open `config/overrides.json` in GitHub or Termux.
-2. Add an entry using the Google Drive File ID:
-```json
-"1mTYmpu3wVrnMQxccVtiCDmVxPDdDgQUO": {
-  "title": "Investcore Commercial Motion Showcase",
-  "category": "motion-graphics",
-  "featured": true,
-  "role": "Lead Motion Designer",
-  "description": "High-energy commercial motion piece highlighting dynamic data visualization and 3D kinetic typography.",
-  "tools": ["After Effects", "Illustrator"]
-}
-```
-3. Commit the change. The site will immediately deploy your changes!
-
----
-
 ## 💼 Using the Upwork Safe Link
 
 When submitting proposals on Upwork or adding a portfolio link to your Upwork profile:
 - **Always use:** [https://motionssalt-portfolio.pages.dev/#/upwork](https://motionssalt-portfolio.pages.dev/#/upwork)
 - **Do NOT use:** your social media links or main page with Telegram/social links in pre-contract Upwork messages.
-- The `/upwork` page is designed to protect your account by presenting your entire work catalogue without any off-platform contact details.
+- The `/upwork` page presents your entire work catalogue without any off-platform contact details, keeping your Upwork account 100% policy-compliant.

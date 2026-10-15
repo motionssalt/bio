@@ -2,22 +2,25 @@
   {
     "id": "video-editing",
     "title": "Video Editing",
+    "prefix": "Video Edit",
     "shortDescription": "Cinematic pacing, anime edits (AMVs), YouTube long-form & short-form reels.",
-    "folderPatterns": ["VIDEOS", "ChimeraVFX", "video", "edits"],
+    "folderPatterns": ["VIDEOS", "videos", "video-editing"],
     "icon": "film"
   },
   {
     "id": "motion-graphics",
     "title": "Motion Graphics",
+    "prefix": "Motion Graphic",
     "shortDescription": "Dynamic typography, kinetic title sequences, brand animations & explainer motion.",
-    "folderPatterns": ["MOTION", "motion", "animation", "kinetic"],
+    "folderPatterns": ["MOTION", "motion", "motion-graphics"],
     "icon": "zap"
   },
   {
     "id": "graphic-design",
     "title": "Graphic Design",
+    "prefix": "Graphic Design",
     "shortDescription": "High-impact social promo art, cover artwork, YouTube thumbnails & visual identity.",
-    "folderPatterns": ["GRAPHICS", "graphics", "design", "posters", "art"],
+    "folderPatterns": ["GRAPHICS", "graphics", "graphic-design"],
     "icon": "palette"
   }
 ]

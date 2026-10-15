@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "startedAt": "2026-10-15T09:03:26Z",
-  "updatedAt": "2026-10-15T09:18:15Z",
+  "updatedAt": "2026-10-15T16:51:00Z",
   "currentStage": "stage_7_handover",
   "stages": [
     {
@@ -23,14 +23,14 @@
       "name": "Public Drive Sync and Catalog Parser",
       "status": "done",
       "notes": "Implemented keyless Drive scraper scripts/sync-drive.ts, FFmpeg WebP poster derivation, MP4 preview clip generation, safety invariant checks, catalog.json generation.",
-      "verification": "Parsed 16 items across ChimeraVFX, GRAPHICS, MOTION. WebP and MP4 preview clips verified."
+      "verification": "Restricted to 3 service folders (VIDEOS, MOTION, GRAPHICS), indexed sequentially per folder, zero artificial names."
     },
     {
       "id": "stage_3_ui_buildout",
       "name": "UI Build-Out (Home, Upwork, Lightbox, Details)",
       "status": "done",
-      "notes": "Hero split, Bento work grid, interactive category filters, Drive player modal with deep-linking (#/work/<id>), Services, Process, ToolsMarquee, About, Socials, Upwork compliance view.",
-      "verification": "Complete component suite built and validated."
+      "notes": "Hero split with randomized showcase and shuffle, Bento work grid, interactive category filters, custom HTML5 VideoPlayer with mobile touch controls, Image Fullscreen Lightbox with zoom, Services, Process, ToolsMarquee, About, Socials, Upwork compliance view.",
+      "verification": "Fixed video player bug from Chrome screenshot. Image fullscreen viewer tested and verified."
     },
     {
       "id": "stage_4_deploy_cicd",
@@ -44,36 +44,37 @@
       "name": "QA & Accessibility Audit",
       "status": "done",
       "notes": "WCAG AA contrast verified in both themes, visible focus rings, ARIA dialog modal, tabular numerals, text-wrap balance, zero broken images, robots.txt, sitemap.xml, _headers.",
-      "verification": "compile_applet passed cleanly, zero linter errors."
+      "verification": "compile_applet and npm run build passed cleanly with zero errors."
     },
     {
       "id": "stage_6_refurbish",
       "name": "Final Premium Refurbishing Pass",
       "status": "done",
-      "notes": "Anti-slop rules enforced: no fake telemetry or comment headers, zero-pill metadata discipline, typographic hierarchy refined, dual-mode logo invert.",
-      "verification": "Before/after verified. Brand identity preserved and elevated."
+      "notes": "Intelligent folder indexing, clean mobile video controls, full screen image viewer, random featuring across 3 folders.",
+      "verification": "Zero artificial titles, perfectly balanced cards, smooth responsive playback."
     },
     {
       "id": "stage_7_handover",
       "name": "Handover & Documentation",
-      "status": "in_progress",
-      "notes": "Docs updated (README, ARCHITECTURE, OPERATIONS, CHANGELOG, RECON), secrets redacted.",
-      "verification": "Final commit and report."
+      "status": "done",
+      "notes": "Docs updated (README, ARCHITECTURE, OPERATIONS, CHANGELOG, RECON), secrets redacted, changes pushed to main.",
+      "verification": "Final commit and report delivered."
     }
   ],
   "decisions": [
     "Tag v0-linkinbio created on main commit 5e41816.",
-    "Mapped subfolders ChimeraVFX, GRAPHICS, MOTION, VIDEOS to the 3 client services.",
-    "Used libsodium-wrappers for GitHub Actions secrets encryption.",
-    "Configured Cloudflare Pages project motionssalt-portfolio as direct-upload target.",
-    "/upwork/ route configured with noindex, strictly no off-platform contact handles."
+    "Strictly restricted catalogue to the 3 service folders: VIDEOS, MOTION, GRAPHICS.",
+    "Excluded root-level files and extraneous folders like ChimeraVFX.",
+    "Assigned sequential intelligent index names (Video Edit #01, Motion Graphic #01, Graphic Design #01) instead of artificial AI titles.",
+    "Replaced cramped Google Drive iframe with native custom HTML5 VideoPlayer with touch-friendly scrub bar, volume, and fullscreen.",
+    "Added immersive image fullscreen lightbox with zoom controls and keyboard navigation.",
+    "Hero showreel dynamically selects an item randomly from the three folders with a Shuffle button."
   ],
   "blockers": [],
   "driveSource": "public-link-scraper",
   "driveFolderMap": {
     "root": "1w2KqAMVrJrHiz4T55FQZaCuYGoFZc5g8",
     "subfolders": {
-      "ChimeraVFX": "1OHjvjY-Z0tUgTrELfdHfpsSQVqjCY2Re",
       "GRAPHICS": "1Er-agNMd4jHgT3naehLFGV4oqsioXCwE",
       "MOTION": "12JjZMc_IEmGOtAq7YdEx3-jwu0-lapzT",
       "VIDEOS": "1mB5OyGcb-jgSVa0K6vlf96jq7nZaHgXg"
@@ -83,5 +84,5 @@
   "upworkUrl": "https://motionssalt-portfolio.pages.dev/#/upwork",
   "fallbackUrl": "https://motionssalt.github.io/bio/",
   "openQuestions": [],
-  "nextAction": "Perform git commit and push to remote main, verify final build, and deliver final report."
+  "nextAction": "Deploy to Cloudflare Pages and commit to GitHub main."
 }

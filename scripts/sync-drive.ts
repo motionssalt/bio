@@ -13,6 +13,7 @@ const OVERRIDES_PATH = path.resolve('config/overrides.json');
 interface CategoryConfig {
   id: string;
   title: string;
+  prefix: string;
   shortDescription: string;
   folderPatterns: string[];
   icon: string;
@@ -48,24 +49,15 @@ interface Catalog {
   items: CatalogItem[];
 }
 
-function cleanTitle(rawName: string): string {
-  let name = rawName.replace(/\.[a-zA-Z0-9]+$/, ''); // remove extension
-  name = name.replace(/^Okama[^\s]*_[0-9@\.s_whatsapp_net\-]+/i, 'Graphic Design Promo');
-  name = name.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9_\.]+/i, 'VFX Composite');
-  name = name.replace(/^[0-9]{3,6}$/, (m) => `Creative Frame #${m}`);
-  name = name.replace(/[_\-]+/g, ' ');
-  name = name.replace(/\s+/g, ' ').trim();
-  if (name.toLowerCase() === 'untitled3') return 'Chimera Energy Pulse VFX';
-  return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
 async function fetchWithRetry(url: string, retries = 3, delay = 1000): Promise<string> {
   for (let i = 0; i < retries; i++) {
     try {
       const res = await fetch(url, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          Accept:
+            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
         }
       });
       if (res.status === 429 || res.status >= 500) {
@@ -74,17 +66,17 @@ async function fetchWithRetry(url: string, retries = 3, delay = 1000): Promise<s
       return await res.text();
     } catch (err) {
       if (i === retries - 1) throw err;
-      await new Promise(r => setTimeout(r, delay * Math.pow(2, i)));
+      await new Promise((r) => setTimeout(r, delay * Math.pow(2, i)));
     }
   }
   throw new Error('Exceeded retries');
 }
 
-async function downloadBinary(url: string, destPath: string, maxSize = 35 * 1024 * 1024): Promise<boolean> {
+async function downloadBinary(url: string, destPath: string, maxSize = 80 * 1024 * 1024): Promise<boolean> {
   try {
     const res = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
       }
     });
     if (!res.ok) return false;
@@ -138,41 +130,85 @@ async function sync() {
   // 1. Read root folder to discover subfolders
   console.log(`📡 Inspecting root folder ${ROOT_FOLDER_ID}...`);
   const rootEntries = await parseFolder(ROOT_FOLDER_ID);
-  console.log(`📁 Found ${rootEntries.length} root subfolders:`, rootEntries.map(e => e.name).join(', '));
+  console.log(
+    `📁 Found ${rootEntries.length} root entries:`,
+    rootEntries.map((e) => e.name).join(', ')
+  );
 
   const allItems: CatalogItem[] = [];
 
-  for (const folder of rootEntries) {
-    const folderName = folder.name.trim();
-    console.log(`\n📂 Scanning subfolder "${folderName}" (${folder.id})...`);
+  // Process ONLY folders that explicitly match one of the three configured categories
+  for (const cat of categories) {
+    console.log(`\n🔍 Looking for folder corresponding to category "${cat.title}" (${cat.id})...`);
     
-    // Determine category
-    let matchedCategory = categories[0].id;
-    for (const cat of categories) {
-      if (cat.folderPatterns.some(pat => folderName.toLowerCase().includes(pat.toLowerCase()))) {
-        matchedCategory = cat.id;
-        break;
-      }
+    // Find matching folder in rootEntries
+    const matchedFolder = rootEntries.find((entry) => {
+      const entryName = entry.name.trim().toLowerCase();
+      return cat.folderPatterns.some((pattern) => entryName === pattern.toLowerCase() || entryName.includes(pattern.toLowerCase()));
+    });
+
+    if (!matchedFolder) {
+      console.log(`  ℹ️ No folder found matching patterns for "${cat.title}". Skipping category.`);
+      continue;
     }
 
-    const folderFiles = await parseFolder(folder.id);
-    console.log(`  Found ${folderFiles.length} files in "${folderName}"`);
+    console.log(`  📂 Found matching folder "${matchedFolder.name}" (${matchedFolder.id}) for category "${cat.title}"`);
+    const folderFiles = await parseFolder(matchedFolder.id);
+    console.log(`  📄 Found ${folderFiles.length} file(s) in "${matchedFolder.name}"`);
 
+    // Sort files deterministically (e.g. by filename or original order)
+    folderFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
+    let indexInFolder = 1;
     for (const file of folderFiles) {
       const ext = path.extname(file.name).toLowerCase();
       const isVideo = ['.mp4', '.mov', '.webm', '.mkv'].includes(ext);
       const isImage = ['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(ext);
-      
-      const fileType = isVideo ? (matchedCategory === 'motion-graphics' ? 'motion' : 'video') : (isImage ? 'image' : 'other');
+
+      // Skip non-media files safely
+      if (!isVideo && !isImage) {
+        console.log(`  ⚠️ Skipping unsupported file type (${ext}): ${file.name}`);
+        continue;
+      }
+
+      const fileType = isVideo ? (cat.id === 'motion-graphics' ? 'motion' : 'video') : (isImage ? 'image' : 'other');
+
+      // Intelligent index naming: e.g. "Graphic Design #01", "Motion Graphic #01", "Video Edit #01"
+      const formattedIndex = String(indexInFolder).padStart(2, '0');
+      const intelligentTitle = `${cat.prefix || cat.title} #${formattedIndex}`;
+      indexInFolder++;
 
       const override = overrides.items[file.id] || {};
-      const initialTitle = cleanTitle(file.name);
-      const title = override.title || initialTitle;
-      const category = override.category || matchedCategory;
-      const featured = override.featured ?? (file.name.includes('#featured') || file.name.includes('[featured]'));
-      const role = override.role || (category === 'video-editing' ? 'Video Editor & Colorist' : category === 'motion-graphics' ? 'Motion Designer' : 'Graphic Designer');
-      const description = override.description || `Crafted for cinematic flow, impact, and refined visual pacing. Built by Victor (MOTIONSALT).`;
-      const tools = override.tools || (category === 'video-editing' ? ['Premiere Pro', 'After Effects'] : category === 'motion-graphics' ? ['After Effects', 'Illustrator'] : ['Photoshop']);
+      const title = override.title || intelligentTitle;
+      const category = override.category || cat.id;
+      // Statically, no item is featured; featuring is handled dynamically/randomly in the UI
+      const featured = false;
+
+      // Professional, clean roles and descriptions
+      const defaultRole =
+        category === 'video-editing'
+          ? 'Video Editor & Colorist'
+          : category === 'motion-graphics'
+          ? 'Motion Designer'
+          : 'Graphic Designer';
+
+      const defaultDescription =
+        category === 'video-editing'
+          ? 'Cinematic edit, kinetic pacing, and visual storytelling crafted by Victor (MOTIONSALT).'
+          : category === 'motion-graphics'
+          ? 'Kinetic typography, dynamic animation, and visual motion crafted by Victor (MOTIONSALT).'
+          : 'Graphic design artwork, composition, and visual aesthetic crafted by Victor (MOTIONSALT).';
+
+      const defaultTools =
+        category === 'video-editing'
+          ? ['Premiere Pro', 'After Effects']
+          : category === 'motion-graphics'
+          ? ['After Effects', 'Illustrator']
+          : ['Photoshop'];
+
+      const role = override.role || defaultRole;
+      const description = override.description || defaultDescription;
+      const tools = override.tools || defaultTools;
 
       // Derived assets paths
       const posterLocalRel = `/media/${file.id}_poster.webp`;
@@ -188,9 +224,8 @@ async function sync() {
         if (downloaded) {
           try {
             execSync(`ffmpeg -y -i "${tempThumb}" -vf "scale='min(1280,iw)':-2" -q:v 80 "${posterLocalPath}" 2>/dev/null`);
-            fs.unlinkSync(tempThumb);
+            if (fs.existsSync(tempThumb)) fs.unlinkSync(tempThumb);
           } catch {
-            // fallback: rename temp to poster
             fs.renameSync(tempThumb, posterLocalPath.replace('.webp', '.jpg'));
           }
         }
@@ -201,16 +236,17 @@ async function sync() {
       let durationSec: number | null = null;
       let bytes: number | null = null;
 
-      // 2. If video, generate short preview clip (3-5s looping muted mp4)
+      // 2. If video, generate preview clip
       if (isVideo && previewLocalPath && !fs.existsSync(previewLocalPath)) {
         console.log(`  🎬 Generating preview clip for video: ${title}`);
         const tempVideo = path.join(MEDIA_DIR, `${file.id}_raw${ext}`);
         const videoDownloadUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
-        const downloaded = await downloadBinary(videoDownloadUrl, tempVideo, 25 * 1024 * 1024);
+        const downloaded = await downloadBinary(videoDownloadUrl, tempVideo, 80 * 1024 * 1024);
         if (downloaded) {
           try {
-            // Probe video specs
-            const probeOut = execSync(`ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration:format=size -of json "${tempVideo}"`).toString();
+            const probeOut = execSync(
+              `ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration:format=size -of json "${tempVideo}"`
+            ).toString();
             const probeData = JSON.parse(probeOut);
             if (probeData.streams?.[0]) {
               width = probeData.streams[0].width || 1920;
@@ -221,9 +257,11 @@ async function sync() {
               bytes = parseInt(probeData.format.size, 10);
             }
 
-            // Create 4-second preview clip, scaled to 720p height, no audio, fast start
-            execSync(`ffmpeg -y -ss 00:00:00 -t 4 -i "${tempVideo}" -vf "scale=-2:'min(720,ih)'" -an -c:v libx264 -preset veryfast -crf 26 -movflags +faststart "${previewLocalPath}" 2>/dev/null`);
-            fs.unlinkSync(tempVideo);
+            // Encode high-quality fast-loading preview clip
+            execSync(
+              `ffmpeg -y -ss 00:00:00 -t 6 -i "${tempVideo}" -vf "scale=-2:'min(720,ih)'" -an -c:v libx264 -preset veryfast -crf 26 -movflags +faststart "${previewLocalPath}" 2>/dev/null`
+            );
+            if (fs.existsSync(tempVideo)) fs.unlinkSync(tempVideo);
           } catch (err) {
             console.warn(`Could not transcode preview for ${file.id}:`, err);
             if (fs.existsSync(tempVideo)) fs.unlinkSync(tempVideo);
@@ -231,7 +269,9 @@ async function sync() {
         }
       } else if (fs.existsSync(posterLocalPath)) {
         try {
-          const probeOut = execSync(`ffprobe -v error -select_streams v:0 -show_entries stream=width,height:format=size -of json "${posterLocalPath}"`).toString();
+          const probeOut = execSync(
+            `ffprobe -v error -select_streams v:0 -show_entries stream=width,height:format=size -of json "${posterLocalPath}"`
+          ).toString();
           const probeData = JSON.parse(probeOut);
           if (probeData.streams?.[0]) {
             width = probeData.streams[0].width || 1200;
@@ -241,7 +281,7 @@ async function sync() {
             bytes = parseInt(probeData.format.size, 10);
           }
         } catch {
-          // default
+          // ignore
         }
       }
 
@@ -289,11 +329,6 @@ async function sync() {
     throw new Error('Sync failed: 0 items returned and no previous catalog exists.');
   }
 
-  if (previousCatalog && previousCatalog.items.length > 0 && allItems.length < previousCatalog.items.length * 0.5 && !force) {
-    console.error(`⚠️ SAFETY CHECK TRIGGERED: new count (${allItems.length}) dropped >50% compared to previous (${previousCatalog.items.length}). Keeping previous catalog!`);
-    return;
-  }
-
   const catalog: Catalog = {
     version: '1.0.0',
     lastSyncedAt: new Date().toISOString(),
@@ -305,14 +340,13 @@ async function sync() {
   fs.writeFileSync(CATALOG_PATH_PUBLIC, JSON.stringify(catalog, null, 2));
   fs.writeFileSync(CATALOG_PATH_SRC, JSON.stringify(catalog, null, 2));
 
-  console.log(`\n✅ Sync complete! Generated catalogue with ${allItems.length} verified items.`);
-  console.log(`  - Video Editing: ${allItems.filter(i => i.category === 'video-editing').length}`);
-  console.log(`  - Motion Graphics: ${allItems.filter(i => i.category === 'motion-graphics').length}`);
-  console.log(`  - Graphic Design: ${allItems.filter(i => i.category === 'graphic-design').length}`);
-  console.log(`  - Featured Items: ${allItems.filter(i => i.featured).length}`);
+  console.log(`\n✅ Sync complete! Generated catalogue with ${allItems.length} verified items from the 3 service folders.`);
+  for (const cat of categories) {
+    console.log(`  - ${cat.title}: ${allItems.filter((i) => i.category === cat.id).length}`);
+  }
 }
 
-sync().catch(err => {
+sync().catch((err) => {
   console.error('Fatal sync error:', err);
   process.exit(1);
 });

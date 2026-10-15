@@ -1,32 +1,28 @@
 import React, { useRef, useState } from 'react';
-import { Play, Sparkles, ArrowDown, ExternalLink } from 'lucide-react';
+import { Play, ArrowDown, ExternalLink, Sparkles, Shuffle } from 'lucide-react';
 import { CatalogItem } from '../types/catalog.ts';
 
 interface HeroProps {
-  featuredItem?: CatalogItem;
+  featuredItem?: CatalogItem | null;
   onOpenProject: (item: CatalogItem) => void;
   isUpworkMode?: boolean;
+  onShuffleFeatured?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpworkMode }) => {
+export const Hero: React.FC<HeroProps> = ({
+  featuredItem,
+  onOpenProject,
+  isUpworkMode,
+  onShuffleFeatured
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const togglePreview = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-    }
-  };
 
   return (
     <section id="top" className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden">
       {/* Background kinetic ambient mesh */}
-      <div 
-        aria-hidden="true" 
+      <div
+        aria-hidden="true"
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 pointer-events-none opacity-20 dark:opacity-25"
       >
         <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-blue-500 blur-[120px]" />
@@ -36,11 +32,9 @@ export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpwor
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Split Hero */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
           {/* Left Column: Typographic Narrative */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            
-            {/* Kicker (Zero-pill discipline: unboxed clean text) */}
+            {/* Kicker */}
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-blue-600 dark:text-blue-400 mb-4">
               <span>Victor Jumbo · Motionsalt</span>
               <span aria-hidden="true">·</span>
@@ -89,10 +83,10 @@ export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpwor
             </div>
           </div>
 
-          {/* Right Column: Hero Visual Container */}
+          {/* Right Column: Hero Visual Container (Random Feature from 3 Folders) */}
           <div className="lg:col-span-5">
             {featuredItem ? (
-              <div 
+              <div
                 className="group relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-xl cursor-pointer"
                 onClick={() => onOpenProject(featuredItem)}
                 onMouseEnter={() => {
@@ -139,10 +133,27 @@ export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpwor
                     <Play className="w-4 h-4 fill-white" />
                   </div>
 
+                  {/* Random Shuffle Button */}
+                  {onShuffleFeatured && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onShuffleFeatured();
+                      }}
+                      className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 hover:bg-black/90 text-white text-xs backdrop-blur-md border border-white/20 transition-all hover:scale-105 cursor-pointer"
+                      title="Shuffle Showcase Item"
+                      aria-label="Shuffle Showcase Item"
+                    >
+                      <Shuffle className="w-3.5 h-3.5 text-blue-400" />
+                      <span>Randomize</span>
+                    </button>
+                  )}
+
                   {/* Bottom Metadata */}
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <div className="flex items-center gap-2 text-xs text-white/70 mb-1">
-                      <span className="uppercase tracking-wider font-semibold">Featured Reel</span>
+                      <span className="uppercase tracking-wider font-semibold">Curated Reel</span>
                       <span aria-hidden="true">·</span>
                       <span>{featuredItem.category.replace('-', ' ')}</span>
                     </div>
@@ -155,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpwor
                 {/* Sub-card details */}
                 <div className="p-4 bg-[var(--bg-surface)] flex items-center justify-between text-xs text-[var(--text-secondary)] border-t border-[var(--border-subtle)]">
                   <span>{featuredItem.role}</span>
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">Click to Play in Full Reel</span>
+                  <span className="font-semibold text-blue-600 dark:text-blue-400">Click to Inspect in Full View</span>
                 </div>
               </div>
             ) : (
@@ -204,7 +215,6 @@ export const Hero: React.FC<HeroProps> = ({ featuredItem, onOpenProject, isUpwor
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

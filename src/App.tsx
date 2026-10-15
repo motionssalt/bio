@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import initialCatalog from './data/catalog.json';
 import { Catalog, CatalogItem } from './types/catalog.ts';
 import { Navbar } from './components/Navbar.tsx';
@@ -17,6 +17,24 @@ export default function App() {
   const [catalog, setCatalog] = useState<Catalog>(initialCatalog as unknown as Catalog);
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
   const [isUpworkMode, setIsUpworkMode] = useState<boolean>(false);
+  const [randomFeaturedItem, setRandomFeaturedItem] = useState<CatalogItem | null>(null);
+
+  // Random item selection from the 3 service folders
+  const pickRandomFeatured = useCallback((items: CatalogItem[]) => {
+    if (!items || items.length === 0) return;
+    // Prefer video/motion if available for dynamic hero video, otherwise any item from the 3 folders
+    const videoOrMotion = items.filter((i) => i.type === 'video' || i.type === 'motion');
+    const pool = videoOrMotion.length > 0 ? videoOrMotion : items;
+    const randomIndex = Math.floor(Math.random() * pool.length);
+    setRandomFeaturedItem(pool[randomIndex]);
+  }, []);
+
+  // Set random item on load
+  useEffect(() => {
+    if (catalog.items && catalog.items.length > 0 && !randomFeaturedItem) {
+      pickRandomFeatured(catalog.items);
+    }
+  }, [catalog.items, randomFeaturedItem, pickRandomFeatured]);
 
   // Check URL hash or path for #/upwork or #/work/:id
   useEffect(() => {
@@ -52,12 +70,13 @@ export default function App() {
       .then((data: Catalog) => {
         if (data?.items && data.items.length > 0) {
           setCatalog(data);
+          pickRandomFeatured(data.items);
         }
       })
       .catch(() => {
         // Fall back to bundled initialCatalog
       });
-  }, []);
+  }, [pickRandomFeatured]);
 
   const openProject = (item: CatalogItem) => {
     setSelectedItem(item);
@@ -92,10 +111,9 @@ export default function App() {
     window.location.hash = upwork ? '/upwork' : '';
   };
 
-  const featuredShowreel =
-    catalog.items.find((i) => i.featured && (i.type === 'video' || i.type === 'motion')) ||
-    catalog.items.find((i) => i.featured) ||
-    catalog.items[0];
+  const handleShuffle = () => {
+    pickRandomFeatured(catalog.items);
+  };
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] transition-colors selection:bg-blue-500 selection:text-white">
@@ -109,9 +127,10 @@ export default function App() {
         {!isUpworkMode ? (
           <>
             <Hero
-              featuredItem={featuredShowreel}
+              featuredItem={randomFeaturedItem}
               onOpenProject={openProject}
               isUpworkMode={false}
+              onShuffleFeatured={handleShuffle}
             />
 
             <ToolsMarquee />
